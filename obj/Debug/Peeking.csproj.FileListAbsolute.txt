@@ -1,0 +1,10 @@
+C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\Peeking.dll
+C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\Peeking.pdb
+C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\ScriptHookVDotNet3.dll
+C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\ScriptHookVDotNet3.xml
+C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.csproj.AssemblyReference.cache
+C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.csproj.CoreCompileInputs.cache
+C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.csproj.CopyComplete
+C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.dll
+C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.pdb
+C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\ScriptHookVDotNet3.pdb
