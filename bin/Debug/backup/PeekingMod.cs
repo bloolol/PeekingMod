@@ -1,14 +1,7 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: PeekingMod.Main
-// Assembly: Peeking, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 22EBDBB2-3803-4F0C-AF1E-1517DF113CF8
-// Assembly location: D:\SteamLibrary\steamapps\common\Grand Theft Auto V\scripts\Peeking.dll
-
-using GTA;
+﻿using GTA;
 using GTA.Math;
 using GTA.Native;
 using GTA.UI;
-using GTAExpansion;
 using System;
 using System.Windows.Forms;
 
@@ -17,7 +10,7 @@ namespace PeekingMod
 {
     public class Main : Script
     {
-        public static int PeekingPosition;
+        private int PeekingPosition;
         private bool enable;
         private Camera cam;
         private Camera SniperCam;
@@ -44,8 +37,6 @@ namespace PeekingMod
 
         public Main()
         {
-            if (Game.IsPaused )
-                return;
             this.Tick += new EventHandler(this.onTick);
             this.KeyDown += new KeyEventHandler(this.onKeyDown);
             this.KeyUp += new KeyEventHandler(this.onKeyUp);
@@ -61,13 +52,13 @@ namespace PeekingMod
             switch (Function.Call<int>(Hash.GET_FOLLOW_PED_CAM_VIEW_MODE))
             {
                 case 0:
-                    return Main.PeekingPosition == 1 ? 0.31f : -0.31f;
+                    return this.PeekingPosition == 1 ? 0.31f : -0.31f;
                 case 1:
-                    return Main.PeekingPosition == 1 ? 0.45f : -0.45f;
+                    return this.PeekingPosition == 1 ? 0.45f : -0.45f;
                 case 2:
-                    return Main.PeekingPosition == 1 ? 0.55f : -0.55f;
+                    return this.PeekingPosition == 1 ? 0.55f : -0.55f;
                 case 4:
-                    return Main.PeekingPosition == 1 ? 0.19f : -0.19f;
+                    return this.PeekingPosition == 1 ? 0.19f : -0.19f;
                 default:
                     return num;
             }
@@ -79,13 +70,13 @@ namespace PeekingMod
             switch (Function.Call<int>(Hash.GET_FOLLOW_PED_CAM_VIEW_MODE))
             {
                 case 0:
-                    return Main.PeekingPosition == 1 ? 10f : -10f;
+                    return this.PeekingPosition == 1 ? 10f : -10f;
                 case 1:
-                    return Main.PeekingPosition == 1 ? 10f : -10f;
+                    return this.PeekingPosition == 1 ? 10f : -10f;
                 case 2:
-                    return Main.PeekingPosition == 1 ? 10f : -10f;
+                    return this.PeekingPosition == 1 ? 10f : -10f;
                 case 4:
-                    return Main.PeekingPosition == 1 ? 10f : -10f;
+                    return this.PeekingPosition == 1 ? 10f : -10f;
                 default:
                     return num;
             }
@@ -93,35 +84,27 @@ namespace PeekingMod
 
         private void onTick(object sender, EventArgs e)
         {
-            if (Game.Player.Character.IsDead && this.cam != (Camera)null && World.RenderingCamera == cam)
-            {
-                World.RenderingCamera = (Camera)null;
-                PeekingPosition = 0;
-                this.cam.Delete();
-               // this.cam = (Camera)null;
-
-            }
-            this.shiftkeymodifier();
+            shiftkeymodifier();
             if (Configuration.ControllerEnable)
             {
                 if (Game.IsControlPressed(Configuration.Controller_PeekingRight) && !Game.Player.Character.IsAnimPlay("weapons@misc@digi_scanner", "walk_additive_right"))
                 {
                     Game.Player.Character.Task.PlayAnimation("weapons@misc@digi_scanner", "walk_additive_right", 8f, -8f, -1, AnimationFlags.StayInEndFrame | AnimationFlags.Secondary | AnimationFlags.Additive, 0.0f);
-                    Main.PeekingPosition = 1;
+                    this.PeekingPosition = 1;
                     this.stance = 1;
                 }
                 if (Game.IsControlPressed(Configuration.Controller_PeekingLeft) && !Game.Player.Character.IsAnimPlay("weapons@misc@digi_scanner", "walk_additive_left"))
                 {
                     Game.Player.Character.Task.PlayAnimation("weapons@misc@digi_scanner", "walk_additive_left", 8f, -8f, -1, AnimationFlags.StayInEndFrame | AnimationFlags.Secondary | AnimationFlags.Additive, 0.0f);
-                    Main.PeekingPosition = 2;
+                    this.PeekingPosition = 2;
                     this.stance = 1;
                 }
-                if (Game.IsControlJustReleased(Configuration.Controller_PeekingRight) && Game.Player.Character.IsAnimPlay("weapons@misc@digi_scanner", "walk_additive_right") && Main.PeekingPosition == 1)
+                if (Game.IsControlJustReleased(Configuration.Controller_PeekingRight) && Game.Player.Character.IsAnimPlay("weapons@misc@digi_scanner", "walk_additive_right") && this.PeekingPosition == 1)
                 {
                     Game.Player.Character.Task.ClearSecondary();
                     this.stance = 4;
                 }
-                if (Game.IsControlJustReleased(Configuration.Controller_PeekingLeft) && Game.Player.Character.IsAnimPlay("weapons@misc@digi_scanner", "walk_additive_left") && Main.PeekingPosition == 2)
+                if (Game.IsControlJustReleased(Configuration.Controller_PeekingLeft) && Game.Player.Character.IsAnimPlay("weapons@misc@digi_scanner", "walk_additive_left") && this.PeekingPosition == 2)
                 {
                     Game.Player.Character.Task.ClearSecondary();
                     this.stance = 4;
@@ -135,7 +118,7 @@ namespace PeekingMod
             }
             if (this.stance != 0 && this.cam != (Camera)null)
             {
-                if (Main.PeekingPosition == 2)
+                if (this.PeekingPosition == 2)
                 {
                     if ((this.stance == 2 || this.stance == 3) && Game.Player.Character.IsAiming && Function.Call<int>(Hash.GET_FOLLOW_PED_CAM_VIEW_MODE) == 1 && !this.playerAlpha)
                     {
@@ -145,13 +128,17 @@ namespace PeekingMod
                         this.playerAlpha = true;
                         this.backalpha = false;
                     }
-                    if (this.alpha && (int)Utilits.LerpTime((float)this.opacity, 125f, this.opacityTick, 33f) == 125)
+                    if (this.alpha)
                     {
-                        this.opacityTick = Environment.TickCount;
-                        this.alpha = false;
+                        Game.Player.Character.Opacity = (int)Utilits.LerpTime((float)this.opacity, 125f, this.opacityTick, 33f);
+                        if ((int)Utilits.LerpTime((float)this.opacity, 125f, this.opacityTick, 33f) == 125)
+                        {
+                            this.opacityTick = Environment.TickCount;
+                            this.alpha = false;
+                        }
                     }
                 }
-                if (((this.stance == 5 && Function.Call<int>(Hash.GET_FOLLOW_PED_CAM_VIEW_MODE) == 1 || this.stance == 3 && Function.Call<int>(Hash.GET_FOLLOW_PED_CAM_VIEW_MODE) != 1) && Main.PeekingPosition == 2 || Main.PeekingPosition == 1 || (double)this.startLerpPos == 0.0 || !Game.Player.Character.IsAiming) && this.playerAlpha && !this.backalpha)
+                if (((this.stance == 5 && Function.Call<int>(Hash.GET_FOLLOW_PED_CAM_VIEW_MODE) == 1 || this.stance == 3 && Function.Call<int>(Hash.GET_FOLLOW_PED_CAM_VIEW_MODE) != 1) && this.PeekingPosition == 2 || this.PeekingPosition == 1 || (double)this.startLerpPos == 0.0 || !Game.Player.Character.IsAiming) && this.playerAlpha && !this.backalpha)
                 {
                     this.opacity = Game.Player.Character.Opacity;
                     this.opacityTick = Environment.TickCount;
@@ -169,12 +156,12 @@ namespace PeekingMod
                         this.playerAlpha = false;
                     }
                 }
-                if (this.stance >= 1 && this.stance < 6 && Main.PeekingPosition != 0)
+                if (this.stance >= 1 && this.stance < 6 && this.PeekingPosition != 0)
                 {
-                    (ShapeTestStatus, ShapeTestResult) result = ShapeTest.StartTestCapsule(Game.Player.Character.Position, this.cam.GetOffsetPosition(this.stance == 2 ? new Vector3(Utilits.LerpTime(0.0f, this.fCameraPositionX(), this.lastTickTime, 33f), 0.0f, 0.0f) : (this.stance == 3 || this.stance == 5 ? new Vector3(this.fCameraPositionX(), 0.0f, 0.0f) : Vector3.Zero)), 0.2f, IntersectFlags.Everything, (Entity)Game.Player.Character).GetResult();
-                    this.CamDidHit = result.Item2.DidHit;
-                    result = ShapeTest.StartTestCapsule(Game.Player.Character.Position, GameplayCamera.GetOffsetPosition(new Vector3(this.fCameraPositionX(), 0.0f, 0.0f)), 0.2f, IntersectFlags.Everything, (Entity)Game.Player.Character).GetResult();
-                    this.GameplayCameraDidHit = result.Item2.DidHit;
+                    ShapeTestHandle shapeTestHandle = ShapeTest.StartTestCapsule(Game.Player.Character.Position, this.cam.GetOffsetPosition(this.stance == 2 ? new Vector3(Utilits.LerpTime(0.0f, this.fCameraPositionX(), this.lastTickTime, 33f), 0.0f, 0.0f) : (this.stance == 3 || this.stance == 5 ? new Vector3(this.fCameraPositionX(), 0.0f, 0.0f) : Vector3.Zero)), 0.2f, IntersectFlags.Everything, (Entity)Game.Player.Character);
+                    this.CamDidHit = shapeTestHandle.GetResult().result.DidHit;
+                    shapeTestHandle = ShapeTest.StartTestCapsule(Game.Player.Character.Position, GameplayCamera.GetOffsetPosition(new Vector3(this.fCameraPositionX(), 0.0f, 0.0f)), 0.2f, IntersectFlags.Everything, (Entity)Game.Player.Character);
+                    this.GameplayCameraDidHit = shapeTestHandle.GetResult().result.DidHit;
                     if (Game.Player.Character.IsAiming && Game.Player.Character.Weapons.Current.Group != WeaponGroup.Unarmed && Game.Player.Character.Weapons.Current.Group != WeaponGroup.Melee && Game.Player.Character.Weapons.Current.Group != WeaponGroup.FireExtinguisher && Game.Player.Character.Weapons.Current.Group != WeaponGroup.PetrolCan && Game.Player.Character.Weapons.Current.Group != WeaponGroup.DigiScanner)
                         Hud.ShowComponentThisFrame(HudComponent.Reticle);
                     if (Game.Player.Character.IsAiming && Game.Player.Character.Weapons.Current.Group == WeaponGroup.Sniper && !this.useScope)
@@ -193,7 +180,7 @@ namespace PeekingMod
             switch (this.stance)
             {
                 case 1:
-                    if (this.cam == (Camera)null && (Main.PeekingPosition == 1 || Main.PeekingPosition == 2))
+                    if (this.cam == (Camera)null && (this.PeekingPosition == 1 || this.PeekingPosition == 2))
                     {
                         this.rLerpPos = (double)this.reversLerpPos == 0.0 ? 0.0f : this.reversLerpPos;
                         this.rLerpRot = (double)this.reversLerpRot == 0.0 ? 0.0f : this.reversLerpRot;
@@ -207,7 +194,7 @@ namespace PeekingMod
                         this.stance = 2;
                         break;
                     }
-                    if (!(this.cam != (Camera)null) || Main.PeekingPosition != 1 && Main.PeekingPosition != 2)
+                    if (!(this.cam != (Camera)null) || this.PeekingPosition != 1 && this.PeekingPosition != 2)
                         break;
                     this.rLerpPos = (double)this.reversLerpPos == 0.0 ? 0.0f : this.reversLerpPos;
                     this.rLerpRot = (double)this.reversLerpRot == 0.0 ? 0.0f : this.reversLerpRot;
@@ -245,7 +232,7 @@ namespace PeekingMod
                     this.stance = 3;
                     break;
                 case 3:
-                    if (Main.PeekingPosition != 0)
+                    if (this.PeekingPosition != 0)
                     {
                         if (this.endLerpRot)
                         {
@@ -270,7 +257,7 @@ namespace PeekingMod
                         this.cam.Position = GameplayCamera.GetOffsetPosition(offset2);
                         break;
                     }
-                    if (Main.PeekingPosition != 0)
+                    if (this.PeekingPosition != 0)
                         break;
                     World.RenderingCamera = (Camera)null;
                     this.cam.Delete();
@@ -307,52 +294,67 @@ namespace PeekingMod
                     this.stance = 0;
                     this.startLerpPos = 0.0f;
                     this.startLerpRot = 0.0f;
-                    Main.PeekingPosition = 0;
+                    this.PeekingPosition = 0;
                     break;
             }
         }
 
         private void onKeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Configuration.Key_PeekingRight && Game.Player.Character.IsAnimPlay("weapons@misc@digi_scanner", "walk_additive_right") && Main.PeekingPosition == 1)
+            if (e.KeyCode == Configuration.Key_PeekingRight && Game.Player.Character.IsAnimPlay("weapons@misc@digi_scanner", "walk_additive_right") && this.PeekingPosition == 1)
             {
+                //Function.Call(Hash.DISABLE_CONTROL_ACTION, (InputArgument)0, (InputArgument)46, (InputArgument)true);
                 Game.Player.Character.Task.ClearSecondary();
                 this.stance = 4;
             }
-            if (e.KeyCode != Configuration.Key_PeekingLeft || !Game.Player.Character.IsAnimPlay("weapons@misc@digi_scanner", "walk_additive_left") || Main.PeekingPosition != 2)
+            if (e.KeyCode != Configuration.Key_PeekingLeft || !Game.Player.Character.IsAnimPlay("weapons@misc@digi_scanner", "walk_additive_left") || this.PeekingPosition != 2)
                 return;
+           // Function.Call(Hash.DISABLE_CONTROL_ACTION, (InputArgument)0, (InputArgument)44, (InputArgument)true);
             Game.Player.Character.Task.ClearSecondary();
             this.stance = 4;
         }
-
-        private void onKeyDown(object sender, KeyEventArgs e)
-        {
-            if ( Game.Player.Character.IsGoingIntoCover || Game.Player.Character.IsInCover || Game.Player.Character.IsAimingFromCover ||Configuration.ControllerEnable || !Game.IsControlPressed(GTA.Control.Sprint) || ShoulderCameraSwitch.ShoulderCameraActive || Game.Player.Character.IsRunning || Game.Player.Character.IsSprinting || Game.Player.Character.IsDead || Game.Player.Character.IsCuffed || Game.Player.Character.IsDiving || Game.Player.Character.IsFalling || Game.Player.Character.IsInVehicle())
-                return;
-            if (e.KeyCode == Configuration.Key_PeekingRight && !Game.Player.Character.IsAnimPlay("weapons@misc@digi_scanner", "walk_additive_right"))
-            {
-                if (Main.PeekingPosition == 2)
-                    return;
-                Game.Player.Character.Task.PlayAnimation("weapons@misc@digi_scanner", "walk_additive_right", 8f, -8f, -1, AnimationFlags.StayInEndFrame | AnimationFlags.Secondary | AnimationFlags.Additive, 0.0f);
-                Main.PeekingPosition = 1;
-                this.stance = 1;
-            }
-            if (e.KeyCode == Configuration.Key_PeekingLeft && !Game.Player.Character.IsAnimPlay("weapons@misc@digi_scanner", "walk_additive_left") && Main.PeekingPosition != 1)
-            {
-                Game.Player.Character.Task.PlayAnimation("weapons@misc@digi_scanner", "walk_additive_left", 8f, -8f, -1, AnimationFlags.StayInEndFrame | AnimationFlags.Secondary | AnimationFlags.Additive, 0.0f);
-                Main.PeekingPosition = 2;
-                this.stance = 1;
-            }
-        }
-
         private void shiftkeymodifier()
         {
-            if (!Game.IsControlPressed(GTA.Control.Sprint) || Game.Player.Character.IsInVehicle())
+            if (Game.IsControlPressed(GTA.Control.Sprint))
+            {
+
+                Game.DisableControlThisFrame(GTA.Control.Talk);
+                Game.DisableControlThisFrame(GTA.Control.Cover);
+
+
+            }
+        }
+        private void onKeyDown(object sender, KeyEventArgs e)
+        {
+            if (Configuration.ControllerEnable)
                 return;
-            Game.DisableControlThisFrame(GTA.Control.Talk);
-            Game.DisableControlThisFrame(GTA.Control.Cover);
-            if (Main.PeekingPosition == 1 || Main.PeekingPosition == 2)
-                Game.DisableControlThisFrame(GTA.Control.Sprint);
+            if (Game.IsControlPressed(GTA.Control.Sprint))
+            {
+
+                    //Game.DisableControlThisFrame(GTA.Control.Talk);
+                    //Game.DisableControlThisFrame(GTA.Control.Cover);
+                
+                
+               // Function.Call(Hash.DISABLE_CONTROL_ACTION, (InputArgument)0, (InputArgument)44, (InputArgument)true);
+                //Function.Call(Hash.DISABLE_CONTROL_ACTION, (InputArgument)0, (InputArgument)46, (InputArgument)true);
+
+                if (e.KeyCode == Configuration.Key_PeekingRight && !Game.Player.Character.IsAnimPlay("weapons@misc@digi_scanner", "walk_additive_right"))
+                {
+                    //Game.DisableControlThisFrame(GTA.Control.Talk);
+                    //Function.Call(Hash.DISABLE_CONTROL_ACTION, (InputArgument)0, (InputArgument)46, (InputArgument)true);
+                    Game.Player.Character.Task.PlayAnimation("weapons@misc@digi_scanner", "walk_additive_right", 8f, -8f, -1, AnimationFlags.StayInEndFrame | AnimationFlags.Secondary | AnimationFlags.Additive, 0.0f);
+                    this.PeekingPosition = 1;
+                    this.stance = 1;
+                }
+                if (e.KeyCode == Configuration.Key_PeekingLeft && !Game.Player.Character.IsAnimPlay("weapons@misc@digi_scanner", "walk_additive_left"))
+                {
+                    //Function.Call(Hash.DISABLE_CONTROL_ACTION, (InputArgument)0, (InputArgument)44, (InputArgument)true);
+                   // Game.DisableControlThisFrame(GTA.Control.Cover);
+                    Game.Player.Character.Task.PlayAnimation("weapons@misc@digi_scanner", "walk_additive_left", 8f, -8f, -1, AnimationFlags.StayInEndFrame | AnimationFlags.Secondary | AnimationFlags.Additive, 0.0f);
+                    this.PeekingPosition = 2;
+                    this.stance = 1;
+                }
+            }
         }
 
         private Vector3 CameraPositionTranslation()
@@ -361,13 +363,13 @@ namespace PeekingMod
             switch (Function.Call<int>(Hash.GET_FOLLOW_PED_CAM_VIEW_MODE))
             {
                 case 0:
-                    return Main.PeekingPosition == 1 ? new Vector3(0.31f, -0.16f, 0.0f) : new Vector3(-0.31f, -0.16f, 0.0f);
+                    return this.PeekingPosition == 1 ? new Vector3(0.31f, -0.16f, 0.0f) : new Vector3(-0.31f, -0.16f, 0.0f);
                 case 1:
-                    return Main.PeekingPosition == 1 ? new Vector3(0.45f, 0.0f, 0.0f) : new Vector3(-0.45f, 0.0f, 0.0f);
+                    return this.PeekingPosition == 1 ? new Vector3(0.45f, 0.0f, 0.0f) : new Vector3(-0.45f, 0.0f, 0.0f);
                 case 2:
-                    return Main.PeekingPosition == 1 ? new Vector3(0.55f, 0.0f, 0.0f) : new Vector3(-0.55f, 0.0f, 0.0f);
+                    return this.PeekingPosition == 1 ? new Vector3(0.55f, 0.0f, 0.0f) : new Vector3(-0.55f, 0.0f, 0.0f);
                 case 4:
-                    return Main.PeekingPosition == 1 ? new Vector3(0.19f, 0.0f, 0.0f) : new Vector3(-0.19f, 0.0f, 0.0f);
+                    return this.PeekingPosition == 1 ? new Vector3(0.19f, 0.0f, 0.0f) : new Vector3(-0.19f, 0.0f, 0.0f);
                 default:
                     return zero;
             }
@@ -379,13 +381,13 @@ namespace PeekingMod
             switch (Function.Call<int>(Hash.GET_FOLLOW_PED_CAM_VIEW_MODE))
             {
                 case 0:
-                    return Main.PeekingPosition == 1 ? new Vector3(0.0f, 10f, 0.0f) : new Vector3(0.0f, -10f, 0.0f);
+                    return this.PeekingPosition == 1 ? new Vector3(0.0f, 10f, 0.0f) : new Vector3(0.0f, -10f, 0.0f);
                 case 1:
-                    return Main.PeekingPosition == 1 ? new Vector3(0.0f, 10f, 0.0f) : new Vector3(0.0f, -10f, 0.0f);
+                    return this.PeekingPosition == 1 ? new Vector3(0.0f, 10f, 0.0f) : new Vector3(0.0f, -10f, 0.0f);
                 case 2:
-                    return Main.PeekingPosition == 1 ? new Vector3(0.0f, 10f, 0.0f) : new Vector3(0.0f, -10f, 0.0f);
+                    return this.PeekingPosition == 1 ? new Vector3(0.0f, 10f, 0.0f) : new Vector3(0.0f, -10f, 0.0f);
                 case 4:
-                    return Main.PeekingPosition == 1 ? new Vector3(0.0f, 10f, 0.0f) : new Vector3(0.0f, -10f, 0.0f);
+                    return this.PeekingPosition == 1 ? new Vector3(0.0f, 10f, 0.0f) : new Vector3(0.0f, -10f, 0.0f);
                 default:
                     return zero;
             }
@@ -405,7 +407,9 @@ namespace PeekingMod
 
         public static float Clamp01(float value)
         {
-            return (double)value < 0.0 ? 0.0f : ((double)value > 1.0 ? 1f : value);
+            if ((double)value < 0.0)
+                return 0.0f;
+            return (double)value > 1.0 ? 1f : value;
         }
 
         public static float SmoothStep(float from, float to, float t)

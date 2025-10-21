@@ -1,10 +1,32 @@
 C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\Peeking.dll
 C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\Peeking.pdb
 C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\ScriptHookVDotNet3.dll
-C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\ScriptHookVDotNet3.xml
 C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.csproj.AssemblyReference.cache
 C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.csproj.CoreCompileInputs.cache
-C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.csproj.CopyComplete
 C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.dll
 C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.pdb
-C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\ScriptHookVDotNet3.pdb
+C:\Users\Chris-No Internet\source\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.csproj.Up2Date
+C:\Users\clope\Downloads\repos\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\Peeking.dll
+C:\Users\clope\Downloads\repos\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\Peeking.pdb
+C:\Users\clope\Downloads\repos\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\GTAExpansion.dll
+C:\Users\clope\Downloads\repos\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\HTools.dll
+C:\Users\clope\Downloads\repos\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\NativeUI.dll
+C:\Users\clope\Downloads\repos\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\NAudio.Core.dll
+C:\Users\clope\Downloads\repos\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\NativeUI.xml
+C:\Users\clope\Downloads\repos\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.csproj.AssemblyReference.cache
+C:\Users\clope\Downloads\repos\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.csproj.CoreCompileInputs.cache
+C:\Users\clope\Downloads\repos\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.csproj.Up2Date
+C:\Users\clope\Downloads\repos\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.dll
+C:\Users\clope\Downloads\repos\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.pdb
+C:\Users\clope\OneDrive\Documents\GTA V Modding\repos\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\Peeking.dll
+C:\Users\clope\OneDrive\Documents\GTA V Modding\repos\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\Peeking.pdb
+C:\Users\clope\OneDrive\Documents\GTA V Modding\repos\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\GTAExpansion.dll
+C:\Users\clope\OneDrive\Documents\GTA V Modding\repos\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\HTools.dll
+C:\Users\clope\OneDrive\Documents\GTA V Modding\repos\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\NativeUI.dll
+C:\Users\clope\OneDrive\Documents\GTA V Modding\repos\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\NAudio.Core.dll
+C:\Users\clope\OneDrive\Documents\GTA V Modding\repos\repos\GTAV_CorrectProjectType\Peeking\bin\Debug\NativeUI.xml
+C:\Users\clope\OneDrive\Documents\GTA V Modding\repos\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.csproj.AssemblyReference.cache
+C:\Users\clope\OneDrive\Documents\GTA V Modding\repos\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.csproj.CoreCompileInputs.cache
+C:\Users\clope\OneDrive\Documents\GTA V Modding\repos\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.csproj.Up2Date
+C:\Users\clope\OneDrive\Documents\GTA V Modding\repos\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.dll
+C:\Users\clope\OneDrive\Documents\GTA V Modding\repos\repos\GTAV_CorrectProjectType\Peeking\obj\Debug\Peeking.pdb
